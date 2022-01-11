@@ -1,0 +1,202 @@
+<html>
+<title></title>
+<body>
+
+<h2>Pounds To Kilogram</h2>
+
+
+
+  <input id="inputPounds" type="number" placeholder="Pounds" oninput="weightConverter(this.value)" onchange="weightConverter(this.value)">
+
+<p>Kilograms: <span id="outputKilograms"></span></p>
+  
+  <h2>Kilogram To Pounds</h2>
+
+
+
+  <input id="inputKilograms" type="number" placeholder="Kilograms" oninput="weightConverter1(this.value)" onchange="weightConverter1(this.value)">
+
+<p>Pounds: <span id="outputpounds"></span></p>
+  <h2>Celsius To Fahrenheit</h2>
+
+
+
+  <input id="inputCelsius" type="number" placeholder="Celsius" oninput="weightConverter2(this.value)" onchange="weightConverter2(this.value)">
+
+<p>Fahrenheit: <span id="outputFahrenheit"></span></p>
+  <h2> Fahrenheit To Celsius </h2>
+
+
+
+  <input id="inputFahrenheit" type="number" placeholder="Fahrenheit" oninput="weightConverter3(this.value)" onchange="weightConverter3(this.value)">
+
+<p>Celsius: <span id="outputCelsius"></span></p>
+  <h2> Celsius To Kelvin </h2>
+
+
+
+  <input id="inputCelsius" type="number" placeholder="Celsius" oninput="weightConverter4(this.value)" onchange="weightConverter4(this.value)">
+
+<p>Kelvin :<span id="outputKelvin"></span></p>
+  <h2>Kelvin To Celsius  </h2>
+
+
+
+  <input id="inputKelvin" type="number" placeholder="Kelvin" oninput="weightConverter5(this.value)" onchange="weightConverter5(this.value)">
+
+<p>Celsius :<span id="outputCelsius1"></span></p>
+  <h2>Kelvin To Fahrenheit </h2>
+
+
+
+  <input id="inputKelvin" type="number" placeholder="Kelvin" oninput="weightConverter6(this.value)" onchange="weightConverter6(this.value)">
+
+<p>Fahrenheit :<span id="outputFahrenheit1"></span></p>
+  <h2> Fahrenheit To Kelvin </h2>
+
+
+
+  <input id="inputFahrenheit" type="number" placeholder="Fahrenheit" oninput="weightConverter7(this.value)" onchange="weightConverter7(this.value)">
+
+<p>Kelvin :<span id="outputKelvin1"></span></p>
+  <h2> Ounce To Gram</h2>
+
+
+
+  <input id="inputOunce" type="number" placeholder="Ounce" oninput="weightConverter8(this.value)" onchange="weightConverter8(this.value)">
+
+<p>Gram :<span id="outputGram"></span></p>
+  <h2>Gram To Ounce </h2>
+
+
+
+  <input id="inputGram" type="number" placeholder="Gram" oninput="weightConverter9(this.value)" onchange="weightConverter9(this.value)">
+
+<p>Ounce :<span id="outputOunce"></span></p>
+  <canvas id="canvas" width="200" height="200"
+style="background-color:#39">
+
+</canvas>
+
+
+
+
+
+
+
+<script>
+function weightConverter(valNum) {
+  document.getElementById("outputKilograms").innerHTML=valNum/2.2046;
+}
+  function weightConverter1(valNum) {
+  document.getElementById("outputpounds").innerHTML=valNum*2.2046;
+}
+  function weightConverter2(valNum) {
+  document.getElementById("outputFahrenheit").innerHTML=(valNum*(9/5))+32;
+}
+  function weightConverter3(valNum) {
+  document.getElementById("outputCelsius").innerHTML=(valNum-32)*(5/9);
+}
+  function weightConverter4(valNum) {
+  document.getElementById("outputKelvin").innerHTML=parseInt(valNum) + 273.15;
+}
+  function weightConverter5(valNum) {
+  document.getElementById("outputCelsius1").innerHTML=(valNum) - 273.15;
+}
+ function weightConverter6(valNum) {
+  document.getElementById("outputFahrenheit1").innerHTML=(((parseFloat(valNum)-273.15)*(9/5))+32);
+}
+  function weightConverter7(valNum) {
+  document.getElementById("outputKelvin1").innerHTML=((parseInt(valNum)-32)*(5/9))+273.15;
+}
+  function weightConverter8(valNum) {
+  document.getElementById("outputGram").innerHTML=parseInt(valNum)*28.3495;
+}
+  function weightConverter9(valNum) {
+  document.getElementById("outputOunce").innerHTML=parseFloat(valNum)/28.3495;
+}
+  var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var radius = canvas.height / 2;
+ctx.translate(radius, radius);
+radius = radius * 0.90
+setInterval(drawClock, 1000);
+
+function drawClock() {
+  drawFace(ctx, radius);
+  drawNumbers(ctx, radius);
+  drawTime(ctx, radius);
+}
+
+function drawFace(ctx, radius) {
+  var grad;
+  ctx.beginPath();
+  ctx.arc(0, 0, radius, 0, 2*Math.PI);
+  ctx.fillStyle = 'white';
+  ctx.fill();
+  grad = ctx.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
+  grad.addColorStop(0, '#333');
+  grad.addColorStop(0.5, 'white');
+  grad.addColorStop(1, '#333');
+  ctx.strokeStyle = grad;
+  ctx.lineWidth = radius*0.1;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(0, 0, radius*0.1, 0, 2*Math.PI);
+  ctx.fillStyle = '#333';
+  ctx.fill();
+}
+
+function drawNumbers(ctx, radius) {
+  var ang;
+  var num;
+  ctx.font = radius*0.15 + "px arial";
+  ctx.textBaseline="middle";
+  ctx.textAlign="center";
+  for(num = 1; num < 13; num++){
+    ang = num * Math.PI / 6;
+    ctx.rotate(ang);
+    ctx.translate(0, -radius*0.85);
+    ctx.rotate(-ang);
+    ctx.fillText(num.toString(), 0, 0);
+    ctx.rotate(ang);
+    ctx.translate(0, radius*0.85);
+    ctx.rotate(-ang);
+  }
+   ctx.font="20px Arial";
+  ctx.fillText("suraj",0,40);
+}
+
+function drawTime(ctx, radius){
+    var now = new Date();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    //hour
+    hour=hour%12;
+    hour=(hour*Math.PI/6)+
+    (minute*Math.PI/(6*60))+
+    (second*Math.PI/(360*60));
+    drawHand(ctx, hour, radius*0.5, radius*0.07);
+    //minute
+    minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
+    drawHand(ctx, minute, radius*0.8, radius*0.07);
+    // second
+    second=(second*Math.PI/30);
+    drawHand(ctx, second, radius*0.9, radius*0.02);
+}
+
+function drawHand(ctx, pos, length, width) {
+    ctx.beginPath();
+    ctx.lineWidth = width;
+    ctx.lineCap = "round";
+    ctx.moveTo(0,0);
+    ctx.rotate(pos);
+    ctx.lineTo(0, -length);
+    ctx.stroke();
+    ctx.rotate(-pos);
+}
+</script>
+
+</body>
+</html>
